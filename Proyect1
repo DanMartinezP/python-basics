@@ -1,0 +1,11 @@
+numbers = [3, 7, 2, 9, 12, 5, 8]
+
+count = 0
+total = 0
+
+for number in numbers:
+    if number > 5:
+        count += 1
+        total += number
+
+print(f"Hay {count} números mayores que 5 y suman un total de {total}")
