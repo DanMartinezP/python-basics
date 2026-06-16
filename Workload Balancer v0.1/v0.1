@@ -1,0 +1,40 @@
+habitaciones = [
+    ("101", 3),
+    ("202", 5),
+    ("305", 2),
+    ("410", 4),
+    ("501", 3),
+    ("602", 6),
+    ("703", 2),
+    ("804", 5)
+]
+
+asignaciones = list()
+empleados = ["Ana", "Juan", "Maria"]
+
+# crea el dict cargas y agrega los empleados
+cargas = dict()
+for user in empleados:
+    cargas[user] = cargas.get(user, 0)
+
+# lee las habitaciones y asigna
+for habitacion, puntos in habitaciones:
+    empleado_libre = min(cargas, key=cargas.get)
+    cargas[empleado_libre] = cargas[empleado_libre] + puntos
+    asigna = (habitacion, empleado_libre, puntos)
+    asignaciones.append(asigna)
+
+asignaciones.sort(key=lambda x: x[1])  
+print("=== ASIGNACIONES ===")
+for habitacion, empleado, puntos in asignaciones:
+    print(f"Habitación {habitacion} -> {empleado} ({puntos} pts)")
+
+lst = []
+for empleado in cargas:
+    lst.append((cargas[empleado], empleado))
+
+lst.sort()
+
+print("=== BALANCE FINAL ===")
+for puntos, empleado in lst:
+    print(f"{empleado} - {puntos} pts")

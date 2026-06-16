@@ -1,0 +1,60 @@
+"""Reto 9.5
+En vez de usar strings tipo "Ana:3", 
+usar una lista de diccionarios como esta:
+
+python
+Copy
+registros = [
+    {"empleado": "Ana", "puntos": 3},
+    {"empleado": "Juan", "puntos": 5},
+    {"empleado": "Ana", "puntos": 2},
+    {"empleado": "Maria", "puntos": 4}
+]
+Y hacer exactamente lo mismo:
+
+sumar cargas por empleado
+sacar MVP
+sacar promedio
+detectar sobrecarga
+
+"""
+
+registros = [
+    {"empleado": "Ana", "puntos": 3},
+    {"empleado": "Juan", "puntos": 5},
+    {"empleado": "Ana", "puntos": 2},
+    {"empleado": "Maria", "puntos": 4}]
+
+registro_cargas=dict()
+#lectura de datos y diccionario. suma
+for registro in registros:
+    nombre = str(registro["empleado"])
+    punto = int(registro["puntos"])
+    registro_cargas[nombre]=registro_cargas.get(nombre,0)+punto
+
+# MVP con empate
+MVP_pts = max(registro_cargas.values())
+MVP_nombres = []
+
+for registro in registro_cargas:
+    if registro_cargas[registro] == MVP_pts:
+        MVP_nombres.append(registro)
+  
+        
+#promedio
+b=0
+nempleados=0
+for registro in registro_cargas:
+    b= registro_cargas[registro] + b
+    nempleados=nempleados+1
+prom=b/nempleados    
+    
+#sobrecarga
+for registro in registro_cargas:
+    if registro_cargas[registro] > 10:
+        print("Alerta! el empleado ", registro, " tiene sobrecarga con ", registro_cargas[registro]," puntos")
+        
+#imprimir
+print("El promedio de puntos por empleado es ", prom)
+print("El MVP es/son ", MVP_nombres, " con ",MVP_pts, " puntos")
+   
